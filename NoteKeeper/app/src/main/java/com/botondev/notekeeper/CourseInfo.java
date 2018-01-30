@@ -10,7 +10,7 @@ import java.util.List;
  * Created by Jim.
  */
 
-public final class CourseInfo {
+public final class CourseInfo implements Parcelable {
     private final String mCourseId;
     private final String mTitle;
     private final List<ModuleInfo> mModules;
@@ -19,6 +19,13 @@ public final class CourseInfo {
         mCourseId = courseId;
         mTitle = title;
         mModules = modules;
+    }
+
+    public CourseInfo(Parcel source) {
+        mCourseId = source.readString();
+        mTitle = source.readString();
+        mModules = new ArrayList<>();
+        source.readTypedList(mModules, ModuleInfo.CREATOR);
     }
 
     public String getCourseId() {
@@ -68,12 +75,35 @@ public final class CourseInfo {
         CourseInfo that = (CourseInfo) o;
 
         return mCourseId.equals(that.mCourseId);
-
     }
 
     @Override
     public int hashCode() {
         return mCourseId.hashCode();
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(mCourseId);
+        dest.writeString(mTitle);
+        dest.writeTypedList(mModules);
+    }
+
+    public static final Creator<CourseInfo> CREATOR = new Creator<CourseInfo>() {
+        @Override
+        public CourseInfo createFromParcel(Parcel source) {
+            return new CourseInfo(source);
+        }
+
+        @Override
+        public CourseInfo[] newArray(int size) {
+            return new CourseInfo[size];
+        }
+    };
 
 }
