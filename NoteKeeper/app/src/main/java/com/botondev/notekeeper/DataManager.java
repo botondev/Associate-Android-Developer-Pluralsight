@@ -40,6 +40,12 @@ public class DataManager {
         return mNotes.size() - 1;
     }
 
+    public int createNewNote(CourseInfo course, String noteTitle, String noteText) {
+        NoteInfo note = new NoteInfo(course, noteTitle, noteText);
+        mNotes.add(note);
+        return mNotes.size() - 1;
+    }
+
     public int findNote(NoteInfo note) {
         for(int index = 0; index < mNotes.size(); index++) {
             if(note.equals(mNotes.get(index)))
@@ -193,6 +199,7 @@ public class DataManager {
 
         return new CourseInfo("java_core", "Java Fundamentals: The Core Platform", modules);
     }
+
     //endregion
 
 }
