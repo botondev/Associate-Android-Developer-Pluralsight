@@ -70,7 +70,7 @@ startActivity(intent);
         recyclerNotes.setLayoutManager(notesLayoutManager);
 
         List<NoteInfo> notes = DataManager.getInstance().getNotes();
-        mNoteRecyclerAdapter = new NoteRecyclerAdapter(this, notes);
+        mNoteRecyclerAdapter = new NoteRecyclerAdapter(this, null);
         recyclerNotes.setAdapter(mNoteRecyclerAdapter);
 
 

@@ -1,0 +1,6 @@
+** sqlLite Import to desktop
+*
+* it only works through debug mode
+
+adb exec-out "run-as com.botondev.notekeeper cat databases/NoteKeeper.db" > NoteKeeper.db
+----------------------------------
